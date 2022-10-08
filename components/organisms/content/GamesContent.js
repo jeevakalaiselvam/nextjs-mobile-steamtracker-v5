@@ -2,14 +2,26 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { getArrayFromObject } from "../../../helper/gameHelper";
+import GameCard from "../../atoms/GameCard";
 const Container = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: column;
+  flex-wrap: wrap;
   width: 100%;
-  height: 100%;
+  min-height: auto;
   background-color: rgba(0, 0, 0, 0.3);
+`;
+
+const NoGames = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.5rem;
 `;
 
 export default function GamesContent() {
@@ -18,12 +30,13 @@ export default function GamesContent() {
   const steam = useSelector((state) => state.steam);
   const settings = useSelector((state) => state.settings);
   const { games } = steam;
+  const gamesList = getArrayFromObject(games);
 
   let searchFilteredGames = [];
   let sortFilteredGames = [];
 
-  if (games.length > 0) {
-    searchFilteredGames = games.filter((game) => game);
+  if (gamesList.length > 0) {
+    searchFilteredGames = gamesList.filter((game) => game);
     sortFilteredGames = searchFilteredGames.filter((game) => game);
   }
 
@@ -31,9 +44,9 @@ export default function GamesContent() {
     <Container>
       {sortFilteredGames.length > 0 &&
         sortFilteredGames.map((game) => {
-          return <h5>GAME</h5>;
+          return <GameCard game={game} />;
         })}
-      {sortFilteredGames.length === 0 && <h5>NO GAMES</h5>}
+      {sortFilteredGames.length === 0 && <NoGames>NO GAMES</NoGames>}
     </Container>
   );
 }

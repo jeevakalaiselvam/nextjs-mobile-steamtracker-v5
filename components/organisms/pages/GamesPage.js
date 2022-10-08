@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { COLOR_TEXT_WHITE, getColor } from "../../../helper/colorHelper";
@@ -41,8 +41,8 @@ const HeaderContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 6vh;
-  max-height: 6vh;
+  min-height: 8vh;
+  max-height: 7vh;
   background-color: rgba(0, 0, 0, 0.25);
 `;
 
@@ -69,8 +69,8 @@ const DrawerContainer = styled.div`
   min-height: 100vh;
   max-height: 100vh;
   background-color: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(2px);
   transition: all 0.5s;
+  z-index: 1;
 `;
 
 export default function GamesPage() {
@@ -81,11 +81,12 @@ export default function GamesPage() {
   const { games } = steam;
   const { gamesPageSettings } = settings;
   const { drawerToggle, optionsToggle } = gamesPageSettings;
+  const [themeGameId, setThemGameId] = useState("1151640");
 
-  const getStoredThemeId = () => {
-    const storedId = READ_JSON(SELECTED_THEME_ID, "1151640");
-    return storedId;
-  };
+  useEffect(() => {
+    const storedId = READ_JSON(SELECTED_THEME_ID);
+    setThemGameId(storedId);
+  }, []);
 
   useEffect(() => {
     if (Object.keys(games).length === 0) {
@@ -94,7 +95,7 @@ export default function GamesPage() {
   }, []);
 
   return (
-    <MainContainer image={HEADER_IMAGE(getStoredThemeId())}>
+    <MainContainer image={HEADER_IMAGE(themeGameId)}>
       <BackDropContainer>
         <DrawerContainer drawerToggle={drawerToggle}>
           <GamesLeftSidebar />

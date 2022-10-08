@@ -14,3 +14,13 @@ export const mapGamesFromArray = (games) => {
   }
   return gamesMap;
 };
+
+export const getArrayFromObject = (map) => {
+  let newArray = [];
+  if (Object.keys(map).length > 0) {
+    Object.keys(map).forEach((singleMapKey) => {
+      newArray.push(map[singleMapKey]);
+    });
+  }
+  return newArray;
+};

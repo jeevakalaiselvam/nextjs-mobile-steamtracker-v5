@@ -16,4 +16,5 @@ export const HEADER_IMAGE = (gameId) => {
   return `https://cdn.cloudflare.steamstatic.com/steam/apps/${gameId}/header.jpg`;
 };
 
-export const API_GET_GAMES = "api/games";
+export const API_GET_GAMES = () => "api/games";
+export const API_GET_GAME = (gameId) => `api/games/${gameId}`;

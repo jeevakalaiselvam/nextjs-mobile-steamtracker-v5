@@ -10,13 +10,11 @@ import {
 import {
   getIcon,
   ICON_MENU,
+  ICON_MENU_ACTIVE,
+  ICON_MENU_DISABLED,
   ICON_OPTIONS_DROPDOWN,
 } from "../../../helper/iconHelper";
-import {
-  gamePageDrawerToggle,
-  gamesPageDrawerToggle,
-  GAME_PAGE_DRAWER_TOGGLE,
-} from "../../../store/actions/settings.actions";
+import { gamesPageDrawerToggle } from "../../../store/actions/settings.actions";
 
 const Container = styled.div`
   display: flex;
@@ -33,9 +31,10 @@ const Left = styled.div`
   min-width: 50px;
   min-height: 50px;
   color: ${(props) => getColor(COLOR_TEXT_WHITE)};
-  font-size: 2rem;
+  font-size: 2.75rem;
 
-  &:hover {
+  &:hover,
+  &:active {
     color: ${(props) => getColor(COLOR_ACCENT)};
   }
 `;
@@ -48,6 +47,7 @@ const Middle = styled.div`
   min-width: 50px;
   min-height: 50px;
   color: ${(props) => getColor(COLOR_TEXT_WHITE)};
+  font-size: 1.75rem;
 `;
 
 const Right = styled.div`
@@ -57,7 +57,11 @@ const Right = styled.div`
   min-width: 50px;
   min-height: 50px;
   color: ${(props) => getColor(COLOR_TEXT_WHITE)};
-  font-size: 2rem;
+  font-size: 2.75rem;
+  &:hover,
+  &:active {
+    color: ${(props) => getColor(COLOR_ACCENT)};
+  }
 `;
 
 export default function GamesHeader() {
@@ -77,8 +81,8 @@ export default function GamesHeader() {
   return (
     <Container>
       <Left onClick={drawerToggleHandler}>
-        {drawerToggle && getIcon(ICON_MENU)}
-        {!drawerToggle && getIcon(ICON_MENU)}
+        {drawerToggle && <></>}
+        {!drawerToggle && getIcon(ICON_MENU_DISABLED)}
       </Left>
       <Middle>All Games</Middle>
       <Right>

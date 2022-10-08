@@ -1,6 +1,7 @@
 import { FaTrophy } from "react-icons/fa";
 import {
   TbArrowBarToUp,
+  TbArrowFork,
   TbArrowLeftBar,
   TbBrandCodesandbox,
   TbCardboards,
@@ -24,7 +25,8 @@ import {
 
 export const ICON_REFRESH = "ICON_REFRESH";
 export const ICON_TROPHY = "ICON_TROPHY";
-export const ICON_MENU = "ICON_MENU";
+export const ICON_MENU_DISABLED = "ICON_MENU_DISABLED";
+export const ICON_MENU_ACTIVE = "ICON_MENU_ACTIVE";
 export const ICON_CLOSE = "ICON_CLOSE";
 export const ICON_THEME_SWITCH = "ICON_THEME_SWITCH";
 export const ICON_DRAWER_CLOSE = "ICON_DRAWER_CLOSE";
@@ -49,8 +51,10 @@ export const getIcon = (type) => {
       return <TbRefresh />;
     case ICON_TROPHY:
       return <FaTrophy />;
-    case ICON_MENU:
+    case ICON_MENU_DISABLED:
       return <TbMenu2 />;
+    case ICON_MENU_ACTIVE:
+      return <TbArrowFork />;
     case ICON_DRAWER_CLOSE:
       return <TbArrowLeftBar />;
     case ICON_CLOSE:

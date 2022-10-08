@@ -3,6 +3,9 @@ import {
   FETCH_ALL_GAMES_ERROR,
   FETCH_ALL_GAMES_REQUEST,
   FETCH_ALL_GAMES_SUCCESS,
+  FETCH_GAME_ERROR,
+  FETCH_GAME_REQUEST,
+  FETCH_GAME_SUCCESS,
 } from "../actions/steam.actions";
 
 const INITIAL_STATE = {
@@ -27,6 +30,25 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         games: {},
+      };
+    case FETCH_GAME_REQUEST:
+      return {
+        ...state,
+      };
+    case FETCH_GAME_SUCCESS:
+      return {
+        ...state,
+        games: {
+          ...state.games,
+          [payload.gameId]: {
+            ...state.games[payload.gameId],
+            data: payload.achievements,
+          },
+        },
+      };
+    case FETCH_GAME_ERROR:
+      return {
+        ...state,
       };
     default:
       return state;
