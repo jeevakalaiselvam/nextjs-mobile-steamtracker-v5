@@ -43,12 +43,22 @@ export default function GameCard({ game }) {
   const settings = useSelector((state) => state.settings);
   const { games } = steam;
 
-  const { gameId } = game;
+  const {
+    id,
+    name,
+    version,
+    achievements,
+    completion,
+    toGet,
+    completed,
+    total,
+    gameId,
+  } = game;
 
   return (
-    <Container show={game?.data?.name ?? false}>
+    <Container show={achievements.length !== 0}>
       <Image image={HEADER_IMAGE(gameId)} />
-      <Title>{game?.data?.name ?? ""}</Title>
+      <Title>{name ?? ""}</Title>
     </Container>
   );
 }

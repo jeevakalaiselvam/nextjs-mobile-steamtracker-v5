@@ -6,7 +6,11 @@ import styled from "styled-components";
 import { COLOR_TEXT_WHITE, getColor } from "../../../helper/colorHelper";
 import { getArrayFromObject } from "../../../helper/gameHelper";
 import { READ_JSON, SELECTED_THEME_ID } from "../../../helper/storageHelper";
-import { API_GET_GAME, HEADER_IMAGE } from "../../../helper/urlHelper";
+import {
+  API_GET_GAME,
+  API_GET_GAMES,
+  HEADER_IMAGE,
+} from "../../../helper/urlHelper";
 import {
   refreshingGamesToggle,
   setRefreshedGames,
@@ -93,32 +97,6 @@ export default function GamesPage() {
     const storedId = READ_JSON(SELECTED_THEME_ID) ?? "1151640";
     setThemeGameId(storedId);
   }, []);
-
-  useEffect(() => {
-    console.log("Getting All Games", games);
-    dispatch(refreshingGamesToggle(false));
-    // if (Object.keys(games).length > 0) {
-    //   dispatch(refreshingGamesToggle(false));
-    //   let gamesList = getArrayFromObject(games);
-    //   console.log("GAMES LIST", { gamesList });
-    //   const allPromises = gamesList.map((game) => {
-    //     return new Promise((resolve, reject) => {
-    //       axios
-    //         .get(API_GET_GAME(game.gameId))
-    //         .then((response) => {
-    //           let gameData = response.data.data;
-    //           resolve(gameData);
-    //         })
-    //         .catch((error) => {
-    //           resolve({ achievements: [] });
-    //         });
-    //     });
-    //   });
-    //   Promise.all(allPromises).then((allGames) => {
-    //     dispatch(setRefreshedGames(allGames));
-    //   });
-    // }
-  }, [games]);
 
   return (
     <MainContainer image={HEADER_IMAGE(themeGameId ?? "1151640")}>

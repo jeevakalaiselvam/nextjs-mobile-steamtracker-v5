@@ -68,6 +68,7 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         games: payload,
+        refreshedRecent: true,
       };
 
     case API_REFRESH_TOGGLE:
