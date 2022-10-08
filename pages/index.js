@@ -26,7 +26,7 @@ const BackdropContainer = styled.div`
   justify-content: center;
   min-width: 100vw;
   max-width: 100vw;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
 `;
 
@@ -34,6 +34,7 @@ export default function Home() {
   const router = useRouter();
   const dispatch = useDispatch();
   const steam = useSelector((state) => state.steam);
+  const settings = useSelector((state) => state.steam);
   const { games } = steam;
 
   useEffect(() => {
