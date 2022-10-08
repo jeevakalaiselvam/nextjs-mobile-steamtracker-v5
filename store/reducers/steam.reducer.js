@@ -3,7 +3,7 @@ import {
   FETCH_ALL_GAMES_ERROR,
   FETCH_ALL_GAMES_REQUEST,
   FETCH_ALL_GAMES_SUCCESS,
-} from "../types/steam.types";
+} from "../actions/steam.actions";
 
 const INITIAL_STATE = {
   games: {},

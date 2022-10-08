@@ -1,7 +1,22 @@
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import {
+  COLOR_ACCENT,
+  COLOR_TEXT_WHITE,
+  getColor,
+} from "../../../helper/colorHelper";
+import {
+  getIcon,
+  ICON_MENU,
+  ICON_OPTIONS_DROPDOWN,
+} from "../../../helper/iconHelper";
+import {
+  gamePageDrawerToggle,
+  gamesPageDrawerToggle,
+  GAME_PAGE_DRAWER_TOGGLE,
+} from "../../../store/actions/settings.actions";
 
 const Container = styled.div`
   display: flex;
@@ -17,6 +32,12 @@ const Left = styled.div`
   justify-content: center;
   min-width: 50px;
   min-height: 50px;
+  color: ${(props) => getColor(COLOR_TEXT_WHITE)};
+  font-size: 2rem;
+
+  &:hover {
+    color: ${(props) => getColor(COLOR_ACCENT)};
+  }
 `;
 
 const Middle = styled.div`
@@ -26,6 +47,7 @@ const Middle = styled.div`
   flex: 1;
   min-width: 50px;
   min-height: 50px;
+  color: ${(props) => getColor(COLOR_TEXT_WHITE)};
 `;
 
 const Right = styled.div`
@@ -34,6 +56,8 @@ const Right = styled.div`
   justify-content: center;
   min-width: 50px;
   min-height: 50px;
+  color: ${(props) => getColor(COLOR_TEXT_WHITE)};
+  font-size: 2rem;
 `;
 
 export default function GamesHeader() {
@@ -42,12 +66,25 @@ export default function GamesHeader() {
   const steam = useSelector((state) => state.steam);
   const settings = useSelector((state) => state.settings);
   const { games } = steam;
+  const { gamesPageSettings } = settings;
+  const { drawerToggle, optionsToggle } = gamesPageSettings;
+
+  const drawerToggleHandler = () => {
+    console.log("SEnding");
+    dispatch(gamesPageDrawerToggle(!drawerToggle));
+  };
 
   return (
     <Container>
-      <Left>Left</Left>
-      <Middle>Middle</Middle>
-      <Right>Right</Right>
+      <Left onClick={drawerToggleHandler}>
+        {drawerToggle && getIcon(ICON_MENU)}
+        {!drawerToggle && getIcon(ICON_MENU)}
+      </Left>
+      <Middle>All Games</Middle>
+      <Right>
+        {optionsToggle && getIcon(ICON_OPTIONS_DROPDOWN)}
+        {!optionsToggle && getIcon(ICON_OPTIONS_DROPDOWN)}
+      </Right>
     </Container>
   );
 }

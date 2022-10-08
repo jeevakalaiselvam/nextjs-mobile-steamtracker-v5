@@ -1,9 +1,4 @@
-import {
-  FETCH_ALL_ACHIEVEMENTS_GLOBAL,
-  FETCH_ALL_ACHIEVEMENTS_SCHEMA,
-  FETCH_ALL_GAMES,
-  STEAM_ALL_ACHIEVEMENTS_PLAYER,
-} from "../../../helper/urlHelper";
+import { FETCH_ALL_GAMES } from "../../../helper/urlHelper";
 
 const axios = require("axios");
 
