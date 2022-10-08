@@ -1,10 +1,16 @@
+import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { COLOR_TEXT_WHITE, getColor } from "../../../helper/colorHelper";
+import { getArrayFromObject } from "../../../helper/gameHelper";
 import { READ_JSON, SELECTED_THEME_ID } from "../../../helper/storageHelper";
-import { HEADER_IMAGE } from "../../../helper/urlHelper";
+import { API_GET_GAME, HEADER_IMAGE } from "../../../helper/urlHelper";
+import {
+  refreshingGamesToggle,
+  setRefreshedGames,
+} from "../../../store/actions/steam.actions";
 import GamesContent from "../content/GamesContent";
 import GamesHeader from "../header/GamesHeader";
 import GamesLeftSidebar from "../left/GamesLeftSidebar";
@@ -81,21 +87,41 @@ export default function GamesPage() {
   const { games } = steam;
   const { gamesPageSettings } = settings;
   const { drawerToggle, optionsToggle } = gamesPageSettings;
-  const [themeGameId, setThemGameId] = useState("1151640");
+  const [themeGameId, setThemeGameId] = useState("1151640");
 
   useEffect(() => {
-    const storedId = READ_JSON(SELECTED_THEME_ID);
-    setThemGameId(storedId);
+    const storedId = READ_JSON(SELECTED_THEME_ID) ?? "1151640";
+    setThemeGameId(storedId);
   }, []);
 
   useEffect(() => {
-    if (Object.keys(games).length === 0) {
-      router.push("/");
-    }
-  }, []);
+    console.log("Getting All Games", games);
+    dispatch(refreshingGamesToggle(false));
+    // if (Object.keys(games).length > 0) {
+    //   dispatch(refreshingGamesToggle(false));
+    //   let gamesList = getArrayFromObject(games);
+    //   console.log("GAMES LIST", { gamesList });
+    //   const allPromises = gamesList.map((game) => {
+    //     return new Promise((resolve, reject) => {
+    //       axios
+    //         .get(API_GET_GAME(game.gameId))
+    //         .then((response) => {
+    //           let gameData = response.data.data;
+    //           resolve(gameData);
+    //         })
+    //         .catch((error) => {
+    //           resolve({ achievements: [] });
+    //         });
+    //     });
+    //   });
+    //   Promise.all(allPromises).then((allGames) => {
+    //     dispatch(setRefreshedGames(allGames));
+    //   });
+    // }
+  }, [games]);
 
   return (
-    <MainContainer image={HEADER_IMAGE(themeGameId)}>
+    <MainContainer image={HEADER_IMAGE(themeGameId ?? "1151640")}>
       <BackDropContainer>
         <DrawerContainer drawerToggle={drawerToggle}>
           <GamesLeftSidebar />

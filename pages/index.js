@@ -42,10 +42,8 @@ export default function Home() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (games && Object.keys(games).length > 0) {
-      router.push("/games");
-    }
-  }, [games]);
+    router.push("/games");
+  }, []);
 
   const getRandomGameId = () => {
     return "1151640";

@@ -7,6 +7,7 @@ import {
   COLOR_TEXT_WHITE,
   getColor,
 } from "../../../helper/colorHelper";
+import { getArrayFromObject } from "../../../helper/gameHelper";
 import {
   getIcon,
   ICON_MENU,
@@ -74,7 +75,6 @@ export default function GamesHeader() {
   const { drawerToggle, optionsToggle } = gamesPageSettings;
 
   const drawerToggleHandler = () => {
-    console.log("SEnding");
     dispatch(gamesPageDrawerToggle(!drawerToggle));
   };
 
@@ -84,7 +84,7 @@ export default function GamesHeader() {
         {drawerToggle && <></>}
         {!drawerToggle && getIcon(ICON_MENU_DISABLED)}
       </Left>
-      <Middle>All Games</Middle>
+      <Middle>{"ALL GAMES"}</Middle>
       <Right>
         {optionsToggle && getIcon(ICON_OPTIONS_DROPDOWN)}
         {!optionsToggle && getIcon(ICON_OPTIONS_DROPDOWN)}

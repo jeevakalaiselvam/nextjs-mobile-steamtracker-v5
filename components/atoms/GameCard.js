@@ -12,9 +12,8 @@ const Container = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 100%;
-  min-height: 200px;
-  min-height: 200px;
   margin-bottom: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.3);
 `;
 
 const Image = styled.div`
@@ -23,9 +22,9 @@ const Image = styled.div`
   justify-content: center;
   background: url(${(props) => props.image});
   width: 100%;
-  min-height: 200px;
-  min-height: 200px;
-  background-size: contain;
+  min-height: 170px;
+  min-height: 170px;
+  background-size: cover;
   background-repeat: no-repeat;
 `;
 
@@ -34,7 +33,7 @@ const Title = styled.div`
   align-items: flex-start;
   justify-content: center;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem 1rem;
 `;
 
 export default function GameCard({ game }) {
@@ -45,14 +44,6 @@ export default function GameCard({ game }) {
   const { games } = steam;
 
   const { gameId } = game;
-
-  useEffect(() => {
-    if (gameId) {
-      if (!games[gameId]?.achievements) {
-        dispatch(fetchGame(gameId));
-      }
-    }
-  }, [gameId]);
 
   return (
     <Container show={game?.data?.name ?? false}>
