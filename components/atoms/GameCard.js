@@ -7,7 +7,7 @@ import { HEADER_IMAGE } from "../../helper/urlHelper";
 import { fetchGame } from "../../store/actions/steam.actions";
 
 const Container = styled.div`
-  display: flex;
+  display: ${(props) => (props.show ? "flex" : "none")};
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
@@ -29,6 +29,14 @@ const Image = styled.div`
   background-repeat: no-repeat;
 `;
 
+const Title = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
+
 export default function GameCard({ game }) {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -47,8 +55,9 @@ export default function GameCard({ game }) {
   }, [gameId]);
 
   return (
-    <Container>
-      <Image image={HEADER_IMAGE(gameId)}>{gameId}</Image>
+    <Container show={game?.data?.name ?? false}>
+      <Image image={HEADER_IMAGE(gameId)} />
+      <Title>{game?.data?.name ?? ""}</Title>
     </Container>
   );
 }

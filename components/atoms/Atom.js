@@ -17,7 +17,7 @@ const Example = styled.div`
   align-items: flex-start;
   justify-content: center;
   width: 100%;
-  background-color: azure;
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 
 export default function GamesPage() {
